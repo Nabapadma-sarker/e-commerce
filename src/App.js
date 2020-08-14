@@ -9,6 +9,9 @@ import Newsletter from './components/newsletter/Newsletter'
 import Footer from './components/footer/Footer'
 import HomePage from './pages/home/HomePage';
 import Shop from './pages/shop/Shop';
+import ProductDetails from './pages/productdetails/ProductDetails';
+import Cart from './pages/cart/Cart';
+import Checkout from './pages/checkout/Checkout';
 import {store} from './store';
 
 
@@ -24,9 +27,9 @@ function App() {
                   <Header/>        
                   <Route exact path="/" component={HomePage}></Route>
                   <Route path="/shop" component={Shop}></Route>
-                  <Route path="/product-details" component={HomePage}></Route>
-                  <Route path="/checkout" component={HomePage}></Route>
-                  <Route path="/cart" component={HomePage}></Route>
+                  <Route path="/product-details" component={ProductDetails}></Route>
+                  <Route path="/checkout" component={Checkout}></Route>
+                  <Route path="/cart" component={Cart}></Route>
               </div>
               <Newsletter/>
               <Footer/>

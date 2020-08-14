@@ -4,7 +4,7 @@ import {SingleProduct} from './SingleProduct';
 import {Pagination} from  './Pagination';
 import {ProductView} from  './ProductView';
 import {Sorting} from  './Sorting';
-
+import {shopPageData} from '../../data/shopPageData';
 
 const Shop = () => {
     return (<React.Fragment>
@@ -20,7 +20,9 @@ const Shop = () => {
                             </div>
                         </div>
                         <div class="row">
-                            <SingleProduct/>
+                            {shopPageData? shopPageData.map((sproduct)=>(
+                                <SingleProduct {...sproduct} />
+                            )): <div>no products here</div>}
                         </div>
                         <Pagination/>
                     </div>
