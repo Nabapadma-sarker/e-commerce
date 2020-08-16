@@ -1,5 +1,6 @@
 import React from 'react';
-
+import {connect} from 'react-redux';
+import {cartIncrement,cartDecrement} from '../../../actions';
 const SingleCart = (props) => {
     console.log(props);
     return ( <tr>
@@ -16,13 +17,13 @@ const SingleCart = (props) => {
             <div className="qty-btn d-flex">
                 <p>Qty</p>
                 <div className="quantity">
-                    <span className="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i className="fa fa-minus" aria-hidden="true"></i></span>
-                    <input type="number" className="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1"/>
-                    <span className="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i className="fa fa-plus" aria-hidden="true"></i></span>
+                    <span className="qty-minus" onClick={()=>props.dispatch(cartDecrement(props.id))}><i className="fa fa-minus" aria-hidden="true"></i></span>
+                    <input type="number" className="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value={props.quantity}/>
+                    <span className="qty-plus" onClick={()=>props.dispatch(cartIncrement(props.id))}><i className="fa fa-plus" aria-hidden="true"></i></span>
                 </div>
             </div>
         </td>
     </tr> );
 }
  
-export default SingleCart;
+export default connect()(SingleCart);

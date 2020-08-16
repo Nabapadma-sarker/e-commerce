@@ -1,13 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {addToCart} from '../../../actions';
+import {addCart} from '../../../actions';
 
-const SingleProduct = (props) => {    
-    const addCart = (id)=>{
-        console.log(id)
-        props.dispatch(addToCart(id))
-    }
+const SingleProduct = (props) => {
     return ( 
         <div className="col-12 col-sm-6 col-md-12 col-xl-6">
             <div className="single-product-wrapper">
@@ -33,7 +29,7 @@ const SingleProduct = (props) => {
                             <i className="fa fa-star" aria-hidden="true"></i>
                         </div>
                         <div className="cart">
-                            {!props.addToCart ? <a style={{cursor: "pointer"}} data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src={"img/core-img/cart.png"} alt="" onClick={()=> addCart(props.id)}/></a>
+                            {!props.addToCart ? <a style={{cursor: "pointer"}} data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src={"img/core-img/cart.png"} alt="" onClick={()=> props.dispatch(addCart(props.id))}/></a>
                             : <Link to="/cart" data-toggle="tooltip" data-placement="left" title="Go To Cart"><img src={"img/core-img/addedtocart.png"} alt=""/></Link>}
                         </div>
                     </div>

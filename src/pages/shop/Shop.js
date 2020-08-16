@@ -10,8 +10,7 @@ import {activePage, addToCart} from '../../actions';
 const Shop = (props) => {
     useEffect(() => {       
     props.dispatch(activePage('/shop'));
-    }, [])
-    console.log(props);
+    }, []);
     return (<React.Fragment>
                 <ShopSidebar/>
                 <div class="amado_product_area section-padding-100">
@@ -25,9 +24,9 @@ const Shop = (props) => {
                             </div>
                         </div>
                         <div class="row">
-                            {props.products ? props.products.map((sproduct)=>(
-                                <SingleProduct {...sproduct} />
-                            )): <div>no products here</div>}
+                            {props.productItems ? props.productItems.map((sproduct)=>{
+                                return (<SingleProduct {...sproduct} />)
+                            }): <div>no products here</div>}
                         </div>
                         <Pagination/>
                     </div>
@@ -36,7 +35,7 @@ const Shop = (props) => {
 }
 const storeToProp = (state)=>{
     return {
-        products:state.products
+        productItems: state.products
     }
 } 
 export default connect(storeToProp, null)(Shop);
