@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <React.Fragment>
               <Search/>        
-              <div class="main-content-wrapper d-flex clearfix">
+              <div className="main-content-wrapper d-flex clearfix">
                   <MobileNav/>
                   <Header/>        
                   <Route exact path="/" component={HomePage}></Route>

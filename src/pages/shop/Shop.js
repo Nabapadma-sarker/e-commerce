@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import {ShopSidebar} from './ShopSidebar';
-import {SingleProduct} from './SingleProduct';
+import SingleProduct from './SingleProduct/SingleProduct';
 import {Pagination} from  './Pagination';
 import {ProductView} from  './ProductView';
 import {Sorting} from  './Sorting';
-import {shopPageData} from '../../data/shopPageData';
+import {activePage, addToCart} from '../../actions';
 
-const Shop = () => {
+const Shop = (props) => {
+    useEffect(() => {       
+    props.dispatch(activePage('/shop'));
+    }, [])
+    console.log(props);
     return (<React.Fragment>
                 <ShopSidebar/>
                 <div class="amado_product_area section-padding-100">
@@ -20,7 +25,7 @@ const Shop = () => {
                             </div>
                         </div>
                         <div class="row">
-                            {shopPageData? shopPageData.map((sproduct)=>(
+                            {props.products ? props.products.map((sproduct)=>(
                                 <SingleProduct {...sproduct} />
                             )): <div>no products here</div>}
                         </div>
@@ -29,5 +34,9 @@ const Shop = () => {
                 </div>
             </React.Fragment>);
 }
- 
-export default Shop;
+const storeToProp = (state)=>{
+    return {
+        products:state.products
+    }
+} 
+export default connect(storeToProp, null)(Shop);

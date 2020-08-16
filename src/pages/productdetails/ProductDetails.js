@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import { connect } from 'react-redux';
 import {Breadcrumb} from './Breadcrumb';
 import {LeftProductDetails} from './LeftProductDetails';
 import {RightProductDetails} from './RightProductDetails';
+import {activePage} from '../../actions';
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
+    useEffect(() => {       
+    props.dispatch(activePage('/product-details'));
+    }, [])
     return (
         <div class="single-product-area section-padding-100 clearfix">
             <div class="container-fluid">
@@ -16,4 +21,4 @@ const ProductDetails = () => {
         </div>);
 }
  
-export default ProductDetails;
+export default connect()(ProductDetails);

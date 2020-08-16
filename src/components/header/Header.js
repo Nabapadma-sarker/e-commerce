@@ -1,7 +1,8 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {connect} from 'react-redux';
 
-const Header = () => {
+const Header = (props) => {
     return ( 
             <header className="header-area clearfix">         
                 <div className="nav-close">
@@ -12,11 +13,11 @@ const Header = () => {
                 </div>         
                 <nav className="amado-nav">
                     <ul>
-                        <li><NavLink to={"/"}>Home</NavLink></li>
-                        <li><NavLink to={"/shop"}>Shop</NavLink></li>
-                        <li><NavLink to={"/product-details"}>Product</NavLink></li>
-                        <li><NavLink to={"/cart"}>Cart</NavLink></li>
-                        <li><NavLink to={"/checkout"}>Checkout</NavLink></li>
+                        <li className = {props.header.activeMenu==='/'? 'active': ''}><NavLink to={"/"}>Home</NavLink></li>
+                        <li className = {props.header.activeMenu==='/shop'? 'active': ''}><NavLink to={"/shop"}>Shop</NavLink></li>
+                        <li className = {props.header.activeMenu==='/product-details'? 'active': ''}><NavLink to={"/product-details"}>Product</NavLink></li>
+                        <li className = {props.header.activeMenu==='/cart'? 'active': ''}><NavLink to={"/cart"}>Cart</NavLink></li>
+                        <li className = {props.header.activeMenu==='/checkout'? 'active': ''}><NavLink to={"/checkout"}>Checkout</NavLink></li>
                     </ul>
                 </nav>
                 <div className="amado-btn-group mt-30 mb-100">
@@ -37,5 +38,10 @@ const Header = () => {
             </header>
         );
 }
- 
-export default Header;
+
+const mapStateToProps = (state)=>{
+   return {
+       header: state.header
+   }
+}
+export default connect(mapStateToProps, null)(Header);

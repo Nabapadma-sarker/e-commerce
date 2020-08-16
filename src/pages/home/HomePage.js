@@ -1,18 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 import SingleCategory from '../../components/product-single-category/SingleCategory'
 import '../../css/core-style.css'
 import {Furnitures} from "../../data/Furniture"
-const HomePage = () => {
-    return ( 
-    <React.Fragment>      
-            <div class="products-catagories-area clearfix">
-                <div class="amado-pro-catagory clearfix">
+import {activePage} from '../../actions'
+const HomePage = (props) => {
+    useEffect(() => {       
+    props.dispatch(activePage('/'));
+    }, [])
+    return (<div className="products-catagories-area clearfix">
+                <div className="amado-pro-catagory clearfix">
                     {Furnitures ? Furnitures.map((furniture)=>(
                          <SingleCategory {...furniture}/>
                          )): <div>no products here</div>}
                 </div>
-            </div>
-    </React.Fragment> );
+            </div>);
 }
  
-export default HomePage;
+export default connect()(HomePage);

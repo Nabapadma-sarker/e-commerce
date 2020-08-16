@@ -6,7 +6,7 @@ import {PriceWidget} from './PriceWidget';
 
 export const ShopSidebar = () => {
     return ( 
-    <div class="shop_sidebar_area">
+    <div className="shop_sidebar_area">
         <CategoryWidget/>
         {/* <BrandWidget/> */}
         <ColorWidget/>

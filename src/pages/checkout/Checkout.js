@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import {LeftCheckout} from './LeftCheckout';
 import {RightCheckout} from './RightCheckout';
-const Checkout = () => {
+import {activePage} from '../../actions';
+const Checkout = (props) => {
+    useEffect(() => {       
+    props.dispatch(activePage('/checkout'));
+    }, [])
     return ( <div class="cart-table-area section-padding-100">
     <div class="container-fluid">
         <div class="row">
@@ -12,4 +17,4 @@ const Checkout = () => {
 </div> );
 }
  
-export default Checkout;
+export default connect()(Checkout);
