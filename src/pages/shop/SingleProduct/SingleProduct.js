@@ -8,7 +8,7 @@ const SingleProduct = (props) => {
         <div className="col-12 col-sm-6 col-md-12 col-xl-6">
             <div className="single-product-wrapper">
                 <div className="product-img">
-                    <img src={props.image} alt=""/>
+                    <img src={props.hoverImage} alt=""/>
                     <img className="hover-img" src={props.hoverImage} alt=""/>
                 </div>
 
@@ -16,9 +16,13 @@ const SingleProduct = (props) => {
                     <div className="product-meta-data">
                         <div className="line"></div>
                         <p className="product-price">${props.price}</p>
-                        <a href="product-details.html">
+                        <Link
+                            to={{
+                            pathname: `/product-detail/${props.id}`,
+                            productdetailProps: props
+                        }}>
                             <h6>{props.title}</h6>
-                        </a>
+                        </Link>
                     </div>
                     <div className="ratings-cart text-right">
                         <div className="ratings">

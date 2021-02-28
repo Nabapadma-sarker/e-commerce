@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {ShopSidebar} from './ShopSidebar';
 import SingleProduct from './SingleProduct/SingleProduct';
@@ -8,7 +8,19 @@ import {Sorting} from  './Sorting';
 import {activePage, addToCart} from '../../actions';
 
 const Shop = (props) => {
+    const [products, setProducts] = useState([])
     useEffect(() => {       
+        fetch('http://localhost:8000/products/',{
+            'method': 'GET',
+            headers: {
+                'content-type': 'application/json',
+                // 'Authorization': 'Token 454544'
+            }
+        })
+        .then(res => res.json())
+        .then(res => setProducts(res))
+        .catch(err => console.log(err));
+
     props.dispatch(activePage('/shop'));
     }, []);
     return (<React.Fragment>
@@ -24,7 +36,7 @@ const Shop = (props) => {
                             </div>
                         </div>
                         <div class="row">
-                            {props.productItems ? props.productItems.map((sproduct)=>{
+                            {products ? products.map((sproduct)=>{
                                 return (<SingleProduct {...sproduct} />)
                             }): <div>no products here</div>}
                         </div>
