@@ -12,6 +12,9 @@ import Shop from './pages/shop/Shop';
 import ProductDetails from './pages/productdetails/ProductDetails';
 import Cart from './pages/cart/Cart';
 import Checkout from './pages/checkout/Checkout';
+import productAdd from './pages/dashboard/addproduct/productAdd';
+import Login from './pages/login/Login';
+import Register from './pages/register/Register'
 import {store} from './store';
 
 
@@ -27,7 +30,10 @@ function App() {
                   <Header/>        
                   <Route exact path="/" component={HomePage}></Route>
                   <Route path="/shop" component={Shop}></Route>
+                  <Route path="/login" component={Login}></Route>
+                  <Route path="/register" component={Register}></Route>
                   <Route path="/product-detail/:productId" component={ProductDetails}></Route>
+                  <Route path="/add-new-product" component={productAdd}></Route>                  
                   <Route path="/checkout" component={Checkout}></Route>
                   <Route path="/cart" component={Cart}></Route>
               </div>
