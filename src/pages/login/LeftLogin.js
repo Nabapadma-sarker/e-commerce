@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 export const LeftLogin = () => {
     return ( 
@@ -16,6 +17,13 @@ export const LeftLogin = () => {
                         </div>
                         <div className="col-md-12 mb-3">
                             <input type="text" className="form-control" id="password" value="" placeholder="Password" required/>
+                        </div>
+
+                        <div className="col-md-4 mt-10">
+                            <a href="#" className="btn amado-btn w-100">Login</a>
+                            <div className="mt-10">
+                            if you don't have account? <NavLink to={"/signup"}>Signup</NavLink> here
+                            </div>
                         </div>
                     </div>
                 </form>

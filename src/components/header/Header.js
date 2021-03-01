@@ -15,9 +15,9 @@ const Header = (props) => {
                     <ul>
                         <li className = {props.header.activeMenu==='/'? 'active': ''}><NavLink to={"/"}>Home</NavLink></li>
                         <li className = {props.header.activeMenu==='/shop'? 'active': ''}><NavLink to={"/shop"}>Shop</NavLink></li>
-                        <li className = {props.header.activeMenu==='/product-details'? 'active': ''}><NavLink to={"/product-details"}>Product</NavLink></li>
                         <li className = {props.header.activeMenu==='/cart'? 'active': ''}><NavLink to={"/cart"}>Cart</NavLink></li>
                         <li className = {props.header.activeMenu==='/checkout'? 'active': ''}><NavLink to={"/checkout"}>Checkout</NavLink></li>
+                        <li className = {props.header.activeMenu==='/login'? 'active': ''}><NavLink to={"/login"}>Login</NavLink></li>
                     </ul>
                 </nav>
                 <div className="amado-btn-group mt-30 mb-100">

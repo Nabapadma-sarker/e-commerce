@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 export const LeftRegister = () => {
     return ( 
@@ -25,6 +26,13 @@ export const LeftRegister = () => {
                                 <option value="1">Seller</option>
                                 <option value="2">Customer</option>
                             </select>
+                        </div>
+
+                        <div className="col-md-4 mt-10">
+                            <a href="#" className="btn amado-btn w-100">Register</a>
+                            <div className="mt-10">
+                            if you already have account, <NavLink to={"/login"}>Login</NavLink> here
+                            </div>
                         </div>
                     </div>
                 </form>

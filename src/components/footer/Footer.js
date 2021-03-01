@@ -16,7 +16,7 @@ const Footer = (props) => {
                                 </div>
                                 <div dangerouslySetInnerHTML={{__html: "<!-- Copywrite Text -->"}} />
                                 <p className="copywrite">
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
+                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved by Nabapadma sarker
                                 </p>
                             </div>
                         </div>
@@ -35,14 +35,14 @@ const Footer = (props) => {
                                                 <li className= {props.header.activeMenu==='/shop'? 'nav-item active': 'nav-item'}>
                                                     <NavLink className="nav-link" to={"/shop"}>Shop</NavLink>
                                                 </li>
-                                                <li className= {props.header.activeMenu==='/product-details'? 'nav-item active': 'nav-item'}>
-                                                    <NavLink className="nav-link" to={"/product-details"}>Product</NavLink>
-                                                </li>
                                                 <li className= {props.header.activeMenu==='/cart'? 'nav-item active': 'nav-item'}>
                                                     <NavLink className="nav-link" to={"/cart"}>Cart</NavLink>
                                                 </li>
                                                 <li className= {props.header.activeMenu==='/checkout'? 'nav-item active': 'nav-item'}>
                                                     <NavLink className="nav-link" to={"/checkout"}>Checkout</NavLink>
+                                                </li>
+                                                <li className= {props.header.activeMenu==='/login'? 'nav-item active': 'nav-item'}>
+                                                    <NavLink className="nav-link" to={"/login"}>Login</NavLink>
                                                 </li>
                                             </ul>
                                         </div>
