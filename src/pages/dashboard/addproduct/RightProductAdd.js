@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 export const RightProductAdd = () => {
     return ( 
@@ -23,7 +24,14 @@ export const RightProductAdd = () => {
                 </div>
 
                 <div className="cart-btn mt-100">
-                    <a href="#" className="btn amado-btn w-100">Show List</a>
+                    <Link
+                        to={{
+                            pathname: `/dashboard`
+                        }}
+                        className="btn amado-btn w-100"
+                        >
+                        Show List
+                    </Link>
                 </div>
             </div>
         </div> );

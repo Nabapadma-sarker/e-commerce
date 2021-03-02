@@ -3,10 +3,17 @@ import {connect} from 'react-redux';
 import {LeftProductAdd} from './LeftProductAdd';
 import {RightProductAdd} from './RightProductAdd';
 import {activePage} from '../../../actions';
-const productAdd = (props) => {
-    // useEffect(() => {       
-    // props.dispatch(activePage('/add-new-product'));
-    // }, []);
+import {useHistory} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+const ProductAdd = (props) => {
+    const [cookies, setCookie] = useCookies(['etoken']);
+    let history = useHistory();
+    
+    useEffect(() => {
+        if(!cookies['etoken']){
+            history.push('/login');
+        }
+    },[cookies])
     return ( <div class="cart-table-area section-padding-100">
     <div class="container-fluid">
         <div class="row">
@@ -17,4 +24,4 @@ const productAdd = (props) => {
 </div> );
 }
  
-export default connect()(productAdd);
+export default connect()(ProductAdd);

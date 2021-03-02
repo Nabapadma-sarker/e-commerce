@@ -3,8 +3,18 @@ import {connect} from 'react-redux';
 import {LeftProductAdd} from './LeftProductAdd';
 import {RightProductAdd} from './RightProductAdd';
 import {activePage} from '../../../actions';
+import {useHistory} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 const ProductEdit = (props) => {
     const [product, setProduct] = useState({})
+    const [cookies, setCookie] = useCookies(['etoken']);
+    let history = useHistory();
+    
+    useEffect(() => {
+        if(!cookies['etoken']){
+            history.push('/login');
+        }
+    },[cookies])
     useEffect(() => { 
         if(props.location.productProps) {
             setProduct(props.location.productProps);

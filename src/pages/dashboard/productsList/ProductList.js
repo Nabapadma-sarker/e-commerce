@@ -3,7 +3,19 @@ import {connect} from 'react-redux';
 import {LeftProductList} from './LeftProductList';
 import {RightProductList} from './RightProductList';
 import {activePage} from '../../../actions';
-const productAdd = (props) => {
+import {useHistory} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
+
+
+const ProductList = (props) => {
+    const [cookies, setCookie] = useCookies(['etoken']);
+    let history = useHistory();
+    
+    useEffect(() => {
+        if(!cookies['etoken']){
+            history.push('/login');
+        }
+    },[cookies])
     // useEffect(() => {       
     // props.dispatch(activePage('/add-new-product'));
     // }, []);
@@ -17,4 +29,4 @@ const productAdd = (props) => {
 </div> );
 }
  
-export default connect()(productAdd);
+export default connect()(ProductList);
