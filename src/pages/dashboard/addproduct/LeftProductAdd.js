@@ -1,6 +1,7 @@
 import React from 'react';
 
-export const LeftProductAdd = () => {
+export const LeftProductAdd = ({product}) => {
+    console.log(product);
     return ( 
         <div className="col-12 col-lg-8">
             <div className="checkout_details_area mt-50 clearfix">
@@ -12,16 +13,16 @@ export const LeftProductAdd = () => {
                 <form action="#" method="post">
                     <div className="row">
                         <div className="col-md-6 mb-3">
-                            <input type="text" className="form-control" id="title" value="" placeholder="Product Title" required/>
+                            <input type="text" className="form-control" id="title" value={product && product.title} placeholder="Product Title" required/>
                         </div>
                         <div className="col-md-6 mb-3">
-                            <input type="number" className="form-control" id="price" value="" placeholder="Product Price" required/>
+                            <input type="number" className="form-control" id="price" value={product && product.price} placeholder="Product Price" required/>
                         </div>
                         <div className="col-12 mb-3">
-                            <input type="number" className="form-control" id="remainQuantity" placeholder="Total Products" value=""/>
+                            <input type="number" className="form-control" id="remainQuantity" placeholder="Total Products" value={product && product.remainQuantity}/>
                         </div>
                         <div className="col-12 mb-3">
-                            <textarea name="description" className="form-control w-100" id="description" cols="30" rows="10" placeholder="Details describe about your order"></textarea>
+                            <textarea name="description" className="form-control w-100" id="description" cols="30" rows="10" placeholder="Details describe about your order">{product && product.description}</textarea>
                         </div>
                         <div className="col-12 mb-3">
                             <select className="w-100" id="productCategorie">

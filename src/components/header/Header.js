@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 const Header = (props) => {
@@ -9,7 +9,13 @@ const Header = (props) => {
                     <i className="fa fa-close" aria-hidden="true"></i>
                 </div>
                 <div className="logo">
-                    <a href="index.html"><img src={"img/core-img/logo.png"} alt="" /></a>
+
+                <Link
+                    to={{
+                        pathname: `/`
+                    }}>
+                    <img src={"img/core-img/logo.png"} alt="" />
+                </Link>
                 </div>         
                 <nav className="amado-nav">
                     <ul>
