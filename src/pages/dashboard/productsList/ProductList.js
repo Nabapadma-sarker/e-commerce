@@ -11,6 +11,11 @@ const ProductList = (props) => {
     const [cookies, setCookie] = useCookies(['etoken']);
     let history = useHistory();
     
+
+    useEffect(()=>{
+        props.dispatch(activePage('/dashboard'));
+    },[])
+
     useEffect(() => {
         if(!cookies['etoken']){
             history.push('/login');

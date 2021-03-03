@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import Select from 'react-select'
 
 export const LeftCheckout = () => {
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
     return ( 
         <div className="col-12 col-lg-8">
             <div className="checkout_details_area mt-50 clearfix">
@@ -24,7 +27,7 @@ export const LeftCheckout = () => {
                             <input type="email" className="form-control" id="email" placeholder="Email" value=""/>
                         </div>
                         <div className="col-12 mb-3">
-                            <select className="w-100" id="country">
+                            <select className="form-control" id="country">
                             <option value="usa">United States</option>
                             <option value="uk">United Kingdom</option>
                             <option value="ger">Germany</option>

@@ -1,8 +1,26 @@
-import React from 'react';
-import {NavLink, Link} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {NavLink, Link, useHistory} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {useCookies} from 'react-cookie';
 
 const Header = (props) => {
+    const [cookies, setCookie, removeCookie] = useCookies(['etoken']);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    let history = useHistory();
+    
+    useEffect(() => {
+        if(!cookies['etoken']){
+            setIsLoggedIn(false)
+            history.push('/login');
+        }
+        else{
+            setIsLoggedIn(true)
+        }
+    },[cookies])
+    const logout = (e)=>{
+        e.preventDefault();
+        removeCookie(['etoken']);
+    }
     return ( 
             <header className="header-area clearfix">         
                 <div className="nav-close">
@@ -23,7 +41,9 @@ const Header = (props) => {
                         <li className = {props.header.activeMenu==='/shop'? 'active': ''}><NavLink to={"/shop"}>Shop</NavLink></li>
                         <li className = {props.header.activeMenu==='/cart'? 'active': ''}><NavLink to={"/cart"}>Cart</NavLink></li>
                         <li className = {props.header.activeMenu==='/checkout'? 'active': ''}><NavLink to={"/checkout"}>Checkout</NavLink></li>
-                        <li className = {props.header.activeMenu==='/login'? 'active': ''}><NavLink to={"/login"}>Login</NavLink></li>
+                        { !isLoggedIn && <li className = {props.header.activeMenu==='/login'? 'active': ''}><NavLink to={"/login"}>Login</NavLink></li>}
+                        { isLoggedIn && <li className = {props.header.activeMenu==='/dashboard'? 'active': ''}><NavLink to={"/dashboard"}>Dashboard</NavLink></li>}
+                        { isLoggedIn && <li><a href="#" onClick={logout}>Logout</a></li>}
                     </ul>
                 </nav>
                 <div className="amado-btn-group mt-30 mb-100">
