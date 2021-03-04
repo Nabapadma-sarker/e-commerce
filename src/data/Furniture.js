@@ -1,47 +1,47 @@
 export const Furnitures =[
     {
         "title":"Modern Chair",
-        "image":"img/bg-img/1.jpg",
+        "image":"images/dummy250.png",
         "description":"From $180"
     },
     {
         "title":"Minimalistic Plant Pot",
-        "image":"img/bg-img/2.jpg",
+        "image":"images/dummy250.png",
         "description":"From $180"
     },
     {
         "title":"Modern Chair",
-        "image":"img/bg-img/3.jpg",
+        "image":"images/dummy250.png",
         "description":"From $180"
     },
     {
         "title":"Night Stand",
-        "image":"img/bg-img/4.jpg",
+        "image":"images/dummy250.png",
         "description":"From $180"
     },
     {
         "title":"Plant Pot",
-        "image":"img/bg-img/5.jpg",
+        "image":"images/dummy250.png",
         "description":"From $18"
     },
     {
         "title":"Small Table",
-        "image":"img/bg-img/6.jpg",
+        "image":"images/dummy250.png",
         "description":"From $320"
     },
     {
         "title":"Metallic Chair",
-        "image":"img/bg-img/7.jpg",
+        "image":"images/dummy250.png",
         "description":"From $318"
     },
     {
         "title":"Modern Rocking Chair",
-        "image":"img/bg-img/8.jpg",
+        "image":"images/dummy250.png",
         "description":"From $318"
     },
     {
         "title":"Home Deco",
-        "image":"img/bg-img/9.jpg",
+        "image":"images/dummy250.png",
         "description":"From $318"
     }
 ]

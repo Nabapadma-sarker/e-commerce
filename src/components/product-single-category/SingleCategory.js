@@ -1,7 +1,7 @@
 import React from 'react';
 const SingleCategory = (props) => {
     return (  <div className="single-products-catagory clearfix">
-                    <a href="shop.html">
+                    <a href="/">
                         <img src={props.image} alt=""/>                  
                         <div className="hover-content">
                             <div className="line"></div>

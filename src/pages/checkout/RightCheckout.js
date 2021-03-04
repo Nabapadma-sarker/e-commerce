@@ -23,7 +23,7 @@ export const RightCheckout = () => {
                 </div>
 
                 <div className="cart-btn mt-100">
-                    <a href="#" className="btn amado-btn w-100">Checkout</a>
+                    <a href="/" className="btn amado-btn w-100">Checkout</a>
                 </div>
             </div>
         </div> );

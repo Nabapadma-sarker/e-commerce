@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 
 export const RightCart = () => {
     return ( <div className="col-12 col-lg-4">
@@ -10,7 +11,7 @@ export const RightCart = () => {
             <li><span>total:</span> <span>$140.00</span></li>
         </ul>
         <div className="cart-btn mt-100">
-            <a href="cart.html" className="btn amado-btn w-100">Checkout</a>
+            <NavLink to={"/checkout"} className="btn amado-btn w-100">Checkout</NavLink>
         </div>
     </div>
 </div> );

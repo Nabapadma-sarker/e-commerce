@@ -50,7 +50,7 @@ const Header = (props) => {
                     <a href="#" className="btn amado-btn active">New this week</a>
                 </div>
                 <div className="cart-fav-search mb-100">
-                    <a href="cart.html" className="cart-nav"><img src={"img/core-img/cart.png"} alt="" /> Cart <span>(0)</span></a>
+                    <NavLink to={"/cart"} className="cart-nav">Cart <img src={"img/core-img/cart.png"} alt="" /><span>(0)</span></NavLink>
                     <a href="#" className="fav-nav"><img src={"img/core-img/favorites.png"} alt="" /> Favourite</a>
                     <a href="#" className="search-nav"><img src={"img/core-img/search.png"} alt="" /> Search</a>
                 </div>
