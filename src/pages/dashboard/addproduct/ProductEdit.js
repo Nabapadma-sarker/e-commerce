@@ -33,7 +33,7 @@ const ProductEdit = (props) => {
     return ( <div class="cart-table-area section-padding-100">
     <div class="container-fluid">
         <div class="row">
-            <LeftProductAdd  product={product} />
+            <LeftProductAdd  product={product} pid={props.match.params.productId}/>
             <RightProductAdd/>
         </div>
     </div>

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import Select from 'react-select'
 
 export const LeftCheckout = () => {
     const [firstname, setFirstname] = useState('')

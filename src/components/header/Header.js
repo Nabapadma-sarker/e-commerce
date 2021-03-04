@@ -11,7 +11,6 @@ const Header = (props) => {
     useEffect(() => {
         if(!cookies['etoken']){
             setIsLoggedIn(false)
-            history.push('/login');
         }
         else{
             setIsLoggedIn(true)

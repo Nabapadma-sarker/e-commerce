@@ -3,47 +3,62 @@
 
 export default class APIService {
     
-    static GetProduct(product_id) {
-      return fetch(`http://localhost:8000/products/${product_id}/`, {
-          'method':'GET',
-          headers: {
-              'Content-Type':'application/json'
-            }
-      }).then(resp => resp.json())
+    static async GetProduct(product_id) {
+      const resp = await fetch(`http://localhost:8000/products/${product_id}/`, {
+        'method': 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await resp.json();
+      console.log(data);
+      return data;
     }
 
-    static GetAllProduct() {
-      return fetch(`http://localhost:8000/products/`, {
-          'method':'PUT',
-          headers: {
-              'Content-Type':'application/json'
-            }
-      }).then(resp => resp.json())
+    static async GetAllProduct() {
+      const resp = await fetch(`http://localhost:8000/products/`, {
+        'method': 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      return await resp.json();
     }
-    
-    static UpdateProduct(product_id, body, token) {
-      return fetch(`http://localhost:8000/products/${product_id}/`, {
-          'method':'PUT',
+
+    static async GetAllCategory(token) {
+      const resp = await fetch(`http://localhost:8000/product-categorie/`, {
+          'method':'GET',
           headers: {
               'Content-Type':'application/json',
               'Authorization':`Token ${token}` 
-            }, 
-            body:JSON.stringify(body)
-
-      }).then(resp => resp.json())
+            }
+      });
+      return await resp.json();
+    }
+    
+    static async UpdateProduct(product_id, body, token) {
+      const resp = await fetch(`http://localhost:8000/products/${product_id}/`, {
+        'method': 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(body)
+      });
+      return await resp.json();
     }
 
-    static AddProduct(body, token) {
+    static async AddProduct(body, token) {
 
-      return fetch('http://localhost:8000/products/', {
-        'method':'POST',
+      const resp = await fetch('http://localhost:8000/products/', {
+        'method': 'POST',
         headers: {
-            'Content-Type':'application/json',
-            'Authorization':`Token ${token}` 
-          }, 
-          body:JSON.stringify(body)
-
-      }).then(resp => resp.json())
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${token}`
+        },
+        body: JSON.stringify(body)
+      });
+      return await resp.json();
 
     }
 
@@ -60,32 +75,30 @@ export default class APIService {
 
     }
 
-    static LoginUser(body) {
+    static async LoginUser(body) {
 
-      return fetch('http://localhost:8000/auth/', {
-        'method':'POST',
+      const resp = await fetch('http://localhost:8000/auth/', {
+        'method': 'POST',
         headers: {
-            'Content-Type':'application/json',
-            
-          }, 
-          body:JSON.stringify(body)
-
-      }).then(resp => resp.json())
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      });
+      return await resp.json();
 
     }
 
 
-    static SignupUser(body) {
+    static async SignupUser(body) {
 
-      return fetch('http://localhost:8000/register/', {
-        'method':'POST',
+      const resp = await fetch('http://localhost:8000/register/', {
+        'method': 'POST',
         headers: {
-            'Content-Type':'application/json',
-            
-          }, 
-          body:JSON.stringify(body)
-
-      }).then(resp => resp.json())
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body)
+      });
+      return await resp.json();
 
     }
 
