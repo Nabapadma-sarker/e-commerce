@@ -9,6 +9,8 @@ export const LeftProductAdd = ({product, pid}) => {
     const [description, setDescription] = useState('');
     const [productCategories, setProductCategories] = useState([]);
     const [productCategorie, setProductCategorie] = useState(0);
+    const [addNewCategory, setAddNewCategory] = useState(false);
+    const [newcat, setNewcat] = useState('');
     const [cookies, setCookie] = useCookies(['etoken']);
 
     useEffect(()=>{
@@ -65,12 +67,19 @@ export const LeftProductAdd = ({product, pid}) => {
                         <div className="col-12 mb-3">                            
                             <textarea name="description" className="form-control w-100" id="description" cols="30" rows="10" placeholder="Details describe about your order" value={product && description} onChange={(e)=>setDescription(e.target.value)} />
                         </div>
-                        <div className="col-12 mb-3">
+                        {!addNewCategory && <div className="col-12 mb-3">
                             <select className="w-100" id="productCategorie" onChange={(e)=>setProductCategorie(e.target.value)} value={productCategorie}>
+                                    <option value="-1">Select Categorie</option>
                                 {productCategories && productCategories.map((pc, i)=>(
                                     <option value={i}>{pc.category}</option>
                                 ))}
                             </select>
+                        </div>}
+                        <div className="col-2 mb-3">
+                            <button className="btn amado-btn w-100" style={{minWidth: '18px', width: '95px !important',fontSize: '35px'}} onClick={(e)=> {e.preventDefault(); !addNewCategory ? setAddNewCategory(true) : setAddNewCategory(false)}}>{addNewCategory ? "-":"+"}</button>
+                        </div>
+                        <div className="col-10 mb-3">
+                            {addNewCategory && <input type="text" style={{padding: '10px 30px'}} className="form-control" id="title" value={newcat} onChange={(e)=>setNewcat(e.target.value)} placeholder="New category" />}
                         </div>
                         <div className="col-12 mb-3">
                             <button className="btn amado-btn w-100">Add product</button>
