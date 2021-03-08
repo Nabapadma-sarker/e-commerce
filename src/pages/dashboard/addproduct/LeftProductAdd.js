@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import APIService from '../../../APIService';
 import {useCookies} from 'react-cookie';
 
@@ -11,7 +11,12 @@ export const LeftProductAdd = ({product, pid}) => {
     const [productCategorie, setProductCategorie] = useState(0);
     const [addNewCategory, setAddNewCategory] = useState(false);
     const [newcat, setNewcat] = useState('');
+    const [hoverImage, setHoverImage] = useState(null);
+    const [errors, setErrors] = useState({});
     const [cookies, setCookie] = useCookies(['etoken']);
+
+    const fileInput = useRef(null)
+    const [selectedFile, setSelectedFile] = useState(null);
 
     useEffect(()=>{
         if (product && Object.keys(product).length) {
@@ -44,6 +49,22 @@ export const LeftProductAdd = ({product, pid}) => {
             console.log(err)
         };
     },[])
+
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const formData =new FormData();
+        formData.append("title", title);
+        formData.append("price", price);
+        formData.append("remainQuantity", remainQuantity);
+        formData.append("productCategorie", productCategorie);
+        formData.append("hoverImage", hoverImage);
+        console.log({title, price, remainQuantity, description, productCategorie, hoverImage})
+        console.log(formData);
+        APIService.AddProduct(formData, cookies['etoken'])
+        .then(res=> { console.log('res',res); setErrors(res);})
+        .catch(err=> console.log(err));
+    }
 
     return ( 
         <div className="col-12 col-lg-8">
@@ -81,9 +102,21 @@ export const LeftProductAdd = ({product, pid}) => {
                         <div className="col-10 mb-3">
                             {addNewCategory && <input type="text" style={{padding: '10px 30px'}} className="form-control" id="title" value={newcat} onChange={(e)=>setNewcat(e.target.value)} placeholder="New category" />}
                         </div>
-                        <div className="col-12 mb-3">
-                            <button className="btn amado-btn w-100">Add product</button>
+                        <div className="col-10 mb-3">
+                            <input type="file" accept="image/png, image/jpeg" className="form-control" onChange={(e) => setHoverImage(e.target.files[0])}/>
                         </div>
+                        <div className="col-12 mb-3">
+                            <button className="btn amado-btn w-100" onClick={onSubmit}>Add product</button>
+                        </div>
+                        {errors && <div className="col-12 mb-3">
+                            {
+                                Object.keys(errors).map(key => 
+                                    (<p className="alert alert-danger" role="alert" value={key}>{key+': '+errors[key]}</p>)
+                                )
+                            }
+                        </div>
+                        }
+                        
 
                     </div>
                 </form>
