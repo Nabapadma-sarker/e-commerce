@@ -57,6 +57,7 @@ export const LeftProductAdd = ({product, pid}) => {
         formData.append("title", title);
         formData.append("price", price);
         formData.append("remainQuantity", remainQuantity);
+        formData.append("description", description);
         formData.append("productCategorie", productCategorie);
         formData.append("hoverImage", hoverImage);
         console.log({title, price, remainQuantity, description, productCategorie, hoverImage})

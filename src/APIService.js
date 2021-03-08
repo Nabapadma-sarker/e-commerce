@@ -53,7 +53,7 @@ export default class APIService {
       const resp = await fetch('http://localhost:8000/products/', {
         'method': 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
+          // 'Content-Type': 'application/json',
           'Authorization': `Token ${token}`
         },
         body: body
