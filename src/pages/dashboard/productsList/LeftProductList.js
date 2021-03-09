@@ -1,8 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import ListSingleProduct from './ListSingleProduct';
+import APIService from '../../../APIService';
+import {useCookies} from 'react-cookie';
 
 export const LeftProductList = () => {
     const [products, setProducts] = useState([])
+    const [cookies, setCookie] = useCookies(['etoken']);
     useEffect(() => {       
         fetch('http://localhost:8000/products/',{
             'method': 'GET',
@@ -17,6 +20,19 @@ export const LeftProductList = () => {
 
     // props.dispatch(activePage('/shop'));
     }, []);
+    const deleteProduct=(productId)=>{
+        console.log("w",productId)
+        
+        try{
+            APIService.DeleteProduct(productId, cookies['etoken'])
+            .then(res => {
+                console.log(res);
+            })
+        }
+        catch(err){
+            console.log(err)
+        };
+    }
     return ( 
         <div className="col-12 col-lg-8">
             <div className="checkout_details_area mt-50 clearfix">
@@ -26,7 +42,7 @@ export const LeftProductList = () => {
                 </div>                
                 <div class="row view-group">
                     {products ? products.map((sproduct)=>{
-                        return (<ListSingleProduct {...sproduct} />)
+                        return (<ListSingleProduct {...sproduct} dproduct={deleteProduct} />)
                     }): <div>no products here</div>}
                 </div>
             </div>

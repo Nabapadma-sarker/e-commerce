@@ -35,6 +35,7 @@ const ListSingleProduct = (props) => {
                                 }}>
                                 Edit Product
                             </Link>
+                            <button type="button" class="btn btn-danger" onClick={e => props.dproduct(props.id)}>Delete</button>
                             </div>
                         </div>
                     </div>
