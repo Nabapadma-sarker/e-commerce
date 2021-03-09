@@ -9,9 +9,11 @@ export const LeftProductAdd = ({product, pid}) => {
     const [description, setDescription] = useState('');
     const [productCategories, setProductCategories] = useState([]);
     const [productCategorie, setProductCategorie] = useState(0);
+    const [productCategorieObj, setProductCategorieObj] = useState([]);
     const [addNewCategory, setAddNewCategory] = useState(false);
     const [newcat, setNewcat] = useState('');
     const [hoverImage, setHoverImage] = useState(null);
+    const [productImage, setProductImage] = useState(null);
     const [errors, setErrors] = useState({});
     const [cookies, setCookie] = useCookies(['etoken']);
 
@@ -60,7 +62,12 @@ export const LeftProductAdd = ({product, pid}) => {
         formData.append("description", description);
         formData.append("productCategorie", productCategorie);
         formData.append("hoverImage", hoverImage);
-        console.log({title, price, remainQuantity, description, productCategorie, hoverImage})
+        productImage.forEach(item => {
+            formData.append('productImage',item,item.name )
+           });
+        // formData.append("productImage", productImage);
+        formData.append("productImage3", productImage);
+        console.log({title, price, remainQuantity, description, productCategorie, hoverImage, productImage})
         console.log(formData);
         APIService.AddProduct(formData, cookies['etoken'])
         .then(res=> { console.log('res',res); setErrors(res);})
@@ -90,7 +97,7 @@ export const LeftProductAdd = ({product, pid}) => {
                             <textarea name="description" className="form-control w-100" id="description" cols="30" rows="10" placeholder="Details describe about your order" value={product && description} onChange={(e)=>setDescription(e.target.value)} />
                         </div>
                         {!addNewCategory && <div className="col-12 mb-3">
-                            <select className="w-100" id="productCategorie" onChange={(e)=>setProductCategorie(e.target.value)} value={productCategorie}>
+                            <select className="w-100" id="productCategorie" onChange={(e)=> { console.log(e.target.value); setProductCategorieObj(productCategories.filter((pc)=>pc.id == e.target.value));setProductCategorie(e.target.value)}} value={productCategorie}>
                                     <option value="-1">Select Categorie</option>
                                 {productCategories && productCategories.map((pc, i)=>(
                                     <option value={i}>{pc.category}</option>
@@ -105,6 +112,9 @@ export const LeftProductAdd = ({product, pid}) => {
                         </div>
                         <div className="col-10 mb-3">
                             <input type="file" accept="image/png, image/jpeg" className="form-control" onChange={(e) => setHoverImage(e.target.files[0])}/>
+                        </div>
+                        <div className="col-10 mb-3">
+                            <input type="file" accept="image/*" multiple className="form-control" onChange={(e) => {let fileCollection = [];while (fileCollection.length) { fileCollection.pop(); } console.log(e.target.files); Array.from(e.target.files).map(f => {console.log(f); fileCollection.push(f);});setProductImage(fileCollection)}}/>
                         </div>
                         <div className="col-12 mb-3">
                             <button className="btn amado-btn w-100" onClick={onSubmit}>Add product</button>
