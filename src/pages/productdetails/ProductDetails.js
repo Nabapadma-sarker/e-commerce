@@ -13,7 +13,7 @@ const ProductDetails = (props) => {
         if(props.location.productdetailProps) {
             setProductDetail(props.location.productdetailProps);
         }else{     
-            fetch(`http://localhost:8000/products/${props.match.params.productId}`,{
+            fetch(`http://localhost:8000/productslist/${props.match.params.productId}`,{
                 'method': 'GET'
             })
             .then(res => res.json())

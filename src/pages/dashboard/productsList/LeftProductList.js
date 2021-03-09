@@ -7,7 +7,7 @@ export const LeftProductList = () => {
     const [products, setProducts] = useState([])
     const [cookies, setCookie] = useCookies(['etoken']);
     useEffect(() => {       
-        fetch('http://localhost:8000/products/',{
+        fetch('http://localhost:8000/productslist/',{
             'method': 'GET',
             headers: {
                 'content-type': 'application/json',

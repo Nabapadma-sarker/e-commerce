@@ -9,12 +9,17 @@ export const LeftProductDetails = ({productDetail}) => {
                     <ol className="carousel-indicators">
                         <li className="active" data-target="#product_details_slider" data-slide-to="0" style={{backgroundImage: `url(${productDetail.hoverImage})`}}>
                         </li>
-                        <li data-target="#product_details_slider" data-slide-to="1" style={{backgroundImage: `url(${productDetail.hoverImage})`}}>
+                        {/* <li data-target="#product_details_slider" data-slide-to="1" style={{backgroundImage: `url(${productDetail.hoverImage})`}}>
                         </li>
                         <li data-target="#product_details_slider" data-slide-to="2" style={{backgroundImage: `url(${productDetail.hoverImage})`}}>
                         </li>
                         <li data-target="#product_details_slider" data-slide-to="3" style={{backgroundImage: `url(${productDetail.hoverImage})`}}>
-                        </li>
+                        </li> */}
+
+                        {productDetail && productDetail.productImage && productDetail.productImage.map((pim)=>(
+                             <li data-target="#product_details_slider" data-slide-to={pim.id} style={{backgroundImage: `url(${pim.imageLink})`}}>
+                             </li>
+                        ))}
                     </ol>
                     <div className="carousel-inner">
                         <div className="carousel-item active">
@@ -22,7 +27,14 @@ export const LeftProductDetails = ({productDetail}) => {
                                 <img className="d-block w-100" src={productDetail.hoverImage} alt="First slide"/>
                             </a>
                         </div>
-                        <div className="carousel-item">
+                        {productDetail && productDetail.productImage && productDetail.productImage.map((pim)=>(
+                            <div className="carousel-item">
+                                <a className="gallery_img" href={pim.imageLink}>
+                                    <img className="d-block w-100" src={pim.imageLink} alt="Second slide"/>
+                                </a>
+                            </div>
+                        ))}
+                        {/* <div className="carousel-item">
                             <a className="gallery_img" href={productDetail.hoverImage}>
                                 <img className="d-block w-100" src={productDetail.hoverImage} alt="Second slide"/>
                             </a>
@@ -36,7 +48,7 @@ export const LeftProductDetails = ({productDetail}) => {
                             <a className="gallery_img" href="img/product-img/pro-big-4.jpg">
                                 <img className="d-block w-100" src={productDetail.hoverImage} alt="Fourth slide"/>
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
