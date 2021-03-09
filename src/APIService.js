@@ -61,6 +61,17 @@ export default class APIService {
       return await resp.json();
 
     }
+    
+    static async PatchProduct(product_id, body, token) {
+      const resp = await fetch(`http://localhost:8000/products/${product_id}/`, {
+        'method': 'PATCH',
+        headers: {
+          'Authorization': `Token ${token}`
+        },
+        body: body
+      });
+      return await resp.json();
+    }
 
     static DeleteProduct(product_id, token) {
 

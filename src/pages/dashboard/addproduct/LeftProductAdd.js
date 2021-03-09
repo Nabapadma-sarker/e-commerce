@@ -8,6 +8,7 @@ export const LeftProductAdd = ({product, pid}) => {
     const [remainQuantity, setRemainQuantity] = useState(0);
     const [description, setDescription] = useState('');
     const [productCategories, setProductCategories] = useState([]);
+    const [productData, setProductData] = useState(null);
     const [productCategorie, setProductCategorie] = useState(0);
     const [productCategorieObj, setProductCategorieObj] = useState([]);
     const [addNewCategory, setAddNewCategory] = useState(false);
@@ -35,6 +36,8 @@ export const LeftProductAdd = ({product, pid}) => {
                 setPrice(data.price);
                 setRemainQuantity(data.remainQuantity);
                 setDescription(data.description);
+                setProductCategorie(data.productCategorie);
+                setProductData(data);                
             })
             .catch(err => console.log(err))
             
@@ -61,17 +64,50 @@ export const LeftProductAdd = ({product, pid}) => {
         formData.append("remainQuantity", remainQuantity);
         formData.append("description", description);
         formData.append("productCategorie", productCategorie);
-        formData.append("hoverImage", hoverImage);
-        productImage.forEach(item => {
+        if(hoverImage){
+            formData.append("hoverImage", hoverImage);
+        }
+        if(productImage){
+            productImage.forEach(item => {
             formData.append('productImage',item,item.name )
            });
+        } 
         // formData.append("productImage", productImage);
-        formData.append("productImage3", productImage);
+        // formData.append("productImage3", productImage);
         console.log({title, price, remainQuantity, description, productCategorie, hoverImage, productImage})
         console.log(formData);
-        APIService.AddProduct(formData, cookies['etoken'])
-        .then(res=> { console.log('res',res); setErrors(res);})
-        .catch(err=> console.log(err));
+        if(pid){
+            if (title == productData.title) {
+                console.log('same title')  
+                formData.delete("title")              
+                console.log(productData)                
+            }
+            if (price == productData.price) {
+                console.log('same price')  
+                formData.delete("price")             
+            }
+            if (remainQuantity == productData.remainQuantity) {
+                console.log('same remainQuantity')  
+                formData.delete("remainQuantity")             
+            }
+            if (description == productData.description) {
+                console.log('same description')  
+                formData.delete("description")             
+            }
+            if (productCategorie == productData.productCategorie) {
+                console.log('same productCategorie')  
+                formData.delete("productCategorie")             
+            }
+            console.log('have pid ',pid)
+            APIService.PatchProduct(pid, formData, cookies['etoken'])
+            .then(res=> { console.log('res',res); setErrors(res);})
+            .catch(err=> console.log(err));
+            }
+        else{
+            APIService.AddProduct(formData, cookies['etoken'])
+            .then(res=> { console.log('res',res); setErrors(res);})
+            .catch(err=> console.log(err));
+        }
     }
 
     return ( 
@@ -100,7 +136,7 @@ export const LeftProductAdd = ({product, pid}) => {
                             <select className="w-100" id="productCategorie" onChange={(e)=> { console.log(e.target.value); setProductCategorieObj(productCategories.filter((pc)=>pc.id == e.target.value));setProductCategorie(e.target.value)}} value={productCategorie}>
                                     <option value="-1">Select Categorie</option>
                                 {productCategories && productCategories.map((pc, i)=>(
-                                    <option value={i}>{pc.category}</option>
+                                    <option value={pc.id}>{pc.category}</option>
                                 ))}
                             </select>
                         </div>}
@@ -117,7 +153,7 @@ export const LeftProductAdd = ({product, pid}) => {
                             <input type="file" accept="image/*" multiple className="form-control" onChange={(e) => {let fileCollection = [];while (fileCollection.length) { fileCollection.pop(); } console.log(e.target.files); Array.from(e.target.files).map(f => {console.log(f); fileCollection.push(f);});setProductImage(fileCollection)}}/>
                         </div>
                         <div className="col-12 mb-3">
-                            <button className="btn amado-btn w-100" onClick={onSubmit}>Add product</button>
+                            <button className="btn amado-btn w-100" onClick={onSubmit}>{pid? "Update":"Add"} product</button>
                         </div>
                         {errors && <div className="col-12 mb-3">
                             {

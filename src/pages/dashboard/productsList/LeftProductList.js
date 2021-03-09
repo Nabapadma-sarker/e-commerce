@@ -26,6 +26,8 @@ export const LeftProductList = () => {
         try{
             APIService.DeleteProduct(productId, cookies['etoken'])
             .then(res => {
+                const remainProducts = products.filter((p)=> p.id !=productId )
+                setProducts(remainProducts)
                 console.log(res);
             })
         }
