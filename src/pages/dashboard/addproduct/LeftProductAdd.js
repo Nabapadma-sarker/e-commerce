@@ -63,7 +63,8 @@ export const LeftProductAdd = ({product, pid}) => {
         formData.append("price", price);
         formData.append("remainQuantity", remainQuantity);
         formData.append("description", description);
-        formData.append("productCategorie", productCategorie);
+        formData.append("productCategorie", JSON.stringify(productCategorieObj));
+        formData.append("nested_a_json", [{"name":"nobo"}]);
         if(hoverImage){
             formData.append("hoverImage", hoverImage);
         }
@@ -74,13 +75,13 @@ export const LeftProductAdd = ({product, pid}) => {
         } 
         // formData.append("productImage", productImage);
         // formData.append("productImage3", productImage);
-        console.log({title, price, remainQuantity, description, productCategorie, hoverImage, productImage})
+        console.log({title, price, remainQuantity, description, productCategorieObj, hoverImage, productImage})
         console.log(formData);
         if(pid){
             if (title == productData.title) {
                 console.log('same title')  
                 formData.delete("title")              
-                console.log(productData)                
+                console.log(productData.title)                
             }
             if (price == productData.price) {
                 console.log('same price')  
@@ -144,7 +145,7 @@ export const LeftProductAdd = ({product, pid}) => {
                             <button className="btn amado-btn w-100" style={{minWidth: '18px', width: '95px !important',fontSize: '35px'}} onClick={(e)=> {e.preventDefault(); !addNewCategory ? setAddNewCategory(true) : setAddNewCategory(false)}}>{addNewCategory ? "-":"+"}</button>
                         </div>
                         <div className="col-10 mb-3">
-                            {addNewCategory && <input type="text" style={{padding: '10px 30px'}} className="form-control" id="title" value={newcat} onChange={(e)=>setNewcat(e.target.value)} placeholder="New category" />}
+                            {addNewCategory && <input type="text" style={{padding: '10px 30px'}} className="form-control" id="title" value={productCategorieObj && productCategorieObj.category} onChange={(e)=>setProductCategorieObj([{'category':e.target.value}])} placeholder="New category" />}
                         </div>
                         <div className="col-10 mb-3">
                             <input type="file" accept="image/png, image/jpeg" className="form-control" onChange={(e) => setHoverImage(e.target.files[0])}/>
