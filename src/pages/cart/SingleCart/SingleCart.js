@@ -1,14 +1,27 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {cartIncrement,cartDecrement} from '../../../actions';
 const SingleCart = (props) => {
     console.log(props);
     return ( <tr>
         <td className="cart_product_img">
-            <a href="#"><img src={props.hoverImage} alt="Product"/></a>
+            <Link
+                to={{
+                pathname: `/product-detail/${props.id}`,
+                productdetailProps: props
+            }}>
+                <img src={props.hoverImage} alt="Product"/>
+            </Link>
         </td>
         <td className="cart_product_desc">
+            <Link
+                to={{
+                pathname: `/product-detail/${props.id}`,
+                productdetailProps: props
+            }}>
             <h5>{props.title}</h5>
+            </Link>
         </td>
         <td className="price">
             <span>${props.price}</span>

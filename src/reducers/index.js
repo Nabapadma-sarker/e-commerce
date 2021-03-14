@@ -17,7 +17,8 @@ export const rootReducer = (state = initialState, action)=>{
         case ADD_TO_CART:
             allcart = [...state.cart];
             allProducts = [...state.products];
-            console.log(action.payload);
+            console.log('reducer ',action);
+            console.log('reducer ',action.payload);
 
             itemInCart = allcart.findIndex((product)=>{
                  return product.id === action.payload.id;
@@ -27,6 +28,7 @@ export const rootReducer = (state = initialState, action)=>{
             // });
             if (itemInCart < 0) {
                 allcart.push(action.payload);
+                console.log(allcart)
                 allcart[allcart.length-1].quantity = 1;
             }
             else {
