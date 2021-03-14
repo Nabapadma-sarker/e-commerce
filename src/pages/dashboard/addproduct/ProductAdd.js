@@ -18,7 +18,7 @@ const ProductAdd = (props) => {
     <div class="container-fluid">
         <div class="row">
             <LeftProductAdd/>
-            {/* <RightProductAdd/> */}
+            <RightProductAdd/>
         </div>
     </div>
 </div> );

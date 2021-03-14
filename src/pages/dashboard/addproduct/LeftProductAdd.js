@@ -16,6 +16,7 @@ export const LeftProductAdd = ({product, pid}) => {
     const [hoverImage, setHoverImage] = useState(null);
     const [productImage, setProductImage] = useState(null);
     const [errors, setErrors] = useState({});
+    const [success, setSuccess] = useState([]);
     const [cookies, setCookie] = useCookies(['etoken']);
 
     const fileInput = useRef(null)
@@ -106,7 +107,17 @@ export const LeftProductAdd = ({product, pid}) => {
             }
         else{
             APIService.AddProduct(formData, cookies['etoken'])
-            .then(res=> { console.log('res',res); setErrors(res);})
+            .then(res=> { 
+                console.log('res',res); 
+                if (res.errors){
+                    setErrors(res.errors);
+                    setSuccess([]);
+                }
+                else{
+                    setErrors([]);
+                    setSuccess({"msg": "Successfully Added."});
+                }
+            })
             .catch(err=> console.log(err));
         }
     }
@@ -160,6 +171,14 @@ export const LeftProductAdd = ({product, pid}) => {
                             {
                                 Object.keys(errors).map(key => 
                                     (<p className="alert alert-danger" role="alert" value={key}>{key+': '+errors[key]}</p>)
+                                )
+                            }
+                        </div>
+                        }
+                        {success && <div className="col-12 mb-3">
+                            {
+                                Object.keys(success).map(key => 
+                                    (<p className="alert alert-success" role="alert" value={key}>{success[key]}</p>)
                                 )
                             }
                         </div>
