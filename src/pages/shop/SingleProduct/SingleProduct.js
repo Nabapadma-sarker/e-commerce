@@ -1,27 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {addCart} from '../../../actions';
+import {addCart, removeCart} from '../../../actions';
 
 const SingleProduct = (props) => {
+    useEffect(() => {
+        console.log(props)
+    },[])
     return ( 
         <div className="col-12 col-sm-6 col-md-12 col-xl-6">
             <div className="single-product-wrapper">
                 <div className="product-img">
-                    <img src={props.hoverImage} alt=""/>
-                    <img className="hover-img" src={props.hoverImage} alt=""/>
+                    <img src={props.productItem.hoverImage} alt=""/>
+                    <img className="hover-img" src={props.productItem.hoverImage} alt=""/>
                 </div>
 
                 <div className="product-description d-flex align-items-center justify-content-between">
                     <div className="product-meta-data">
                         <div className="line"></div>
-                        <p className="product-price">${props.price}</p>
+                        <p className="product-price">${props.productItem.price}</p>
                         <Link
                             to={{
-                            pathname: `/product-detail/${props.id}`,
-                            productdetailProps: props
+                            pathname: `/product-detail/${props.productItem.id}`,
+                            productdetailProps: props.productItem
                         }}>
-                            <h6>{props.title}</h6>
+                            <h6>{props.productItem.title}</h6>
                         </Link>
                     </div>
                     <div className="ratings-cart text-right">
@@ -33,8 +36,8 @@ const SingleProduct = (props) => {
                             <i className="fa fa-star" aria-hidden="true"></i>
                         </div>
                         <div className="cart">
-                            {!props.addToCart ? <a style={{cursor: "pointer"}} data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src={"img/core-img/cart.png"} alt="" onClick={()=> props.dispatch(addCart(props.id))}/></a>
-                            : <Link to="/cart" data-toggle="tooltip" data-placement="left" title="Go To Cart"><img src={"img/core-img/addedtocart.png"} alt=""/></Link>}
+                            {!props.productItem.addToCart ? <a style={{cursor: "pointer"}} data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src={"img/core-img/cart.png"} alt="" onClick={()=> {props.dispatch(addCart(props.productItem));props.addCartItems(props.productItem);}}/></a>
+                            : <a style={{cursor: "pointer"}} data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src={"img/core-img/addedtocart.png"} alt="" onClick={()=> {props.dispatch(removeCart(props.productItem));props.removeCartItems(props.productItem);}}/></a>}
                         </div>
                     </div>
                 </div>

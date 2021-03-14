@@ -5,13 +5,13 @@ const SingleCart = (props) => {
     console.log(props);
     return ( <tr>
         <td className="cart_product_img">
-            <a href="#"><img src={props.image} alt="Product"/></a>
+            <a href="#"><img src={props.hoverImage} alt="Product"/></a>
         </td>
         <td className="cart_product_desc">
             <h5>{props.title}</h5>
         </td>
         <td className="price">
-            <span>{props.price}</span>
+            <span>${props.price}</span>
         </td>
         <td className="qty">
             <div className="qty-btn d-flex">

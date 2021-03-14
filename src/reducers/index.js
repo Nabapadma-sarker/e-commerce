@@ -1,4 +1,4 @@
-import {ADD_TO_CART,ACTIVE_PAGE,CART_INCREMENT,CART_DECREMENT} from '../actions';
+import {ADD_TO_CART,REMOVE_FROM_CART,ACTIVE_PAGE,CART_INCREMENT,CART_DECREMENT} from '../actions';
 
 import {shopPageData} from "../data/shopPageData";
 
@@ -20,19 +20,29 @@ export const rootReducer = (state = initialState, action)=>{
             console.log(action.payload);
 
             itemInCart = allcart.findIndex((product)=>{
-                 return product.id === action.payload;
+                 return product.id === action.payload.id;
             });
-            itemId = allProducts.findIndex((product)=>{
-                 return product.id === action.payload;
-            });
+            // itemId = allProducts.findIndex((product)=>{
+            //      return product.id === action.payload;
+            // });
             if (itemInCart < 0) {
-                let newProduct = {
-                    ...allProducts[itemId]
-                }
-                allcart.push(newProduct);
+                allcart.push(action.payload);
                 allcart[allcart.length-1].quantity = 1;
             }
-            allProducts[itemId].addToCart = true;
+            else {
+                allcart[itemInCart].quantity += 1;            
+            }
+            // allProducts[itemId].addToCart = true;
+            return {...state, cart: allcart, products: allProducts};
+        case REMOVE_FROM_CART:
+            allcart = [...state.cart];
+            allProducts = [...state.products];
+            console.log(action.payload);
+
+            itemInCart = allcart.findIndex((product)=>{
+                 return product.id === action.payload.id;
+            });
+            allcart.splice(itemInCart,1);
             return {...state, cart: allcart, products: allProducts};
         case CART_INCREMENT:
             allcart = [...state.cart];

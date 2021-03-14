@@ -30,7 +30,7 @@ export const RightProductDetails = ({productDetail}) => {
                     <p>{productDetail.description}</p>
                 </div>
 
-               <AddToCart/>
+               <AddToCart productDetail={productDetail}/>
 
             </div>
         </div> );

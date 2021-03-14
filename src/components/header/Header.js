@@ -50,7 +50,7 @@ const Header = (props) => {
                     <a href="#" className="btn amado-btn active">New this week</a>
                 </div>
                 <div className="cart-fav-search mb-100">
-                    <NavLink to={"/cart"} className="cart-nav">Cart <img src={"img/core-img/cart.png"} alt="" /><span>(0)</span></NavLink>
+                    <NavLink to={"/cart"} className="cart-nav">Cart <img src={"img/core-img/cart.png"} alt="" /><span>({props.cartItems.length})</span></NavLink>
                     <a href="#" className="fav-nav"><img src={"img/core-img/favorites.png"} alt="" /> Favourite</a>
                     <a href="#" className="search-nav"><img src={"img/core-img/search.png"} alt="" /> Search</a>
                 </div>
@@ -66,7 +66,8 @@ const Header = (props) => {
 
 const mapStateToProps = (state)=>{
    return {
-       header: state.header
+       header: state.header,
+       cartItems: state.cart
    }
 }
 export default connect(mapStateToProps, null)(Header);

@@ -18,11 +18,38 @@ const Shop = (props) => {
             }
         })
         .then(res => res.json())
-        .then(res => setProducts(res))
+        .then(res => {
+            const itemsNotInCart = [...res]
+            for (const item of props.cartItems){
+                let itemInCart = itemsNotInCart.findIndex((product)=>{
+                     return product.id === item.id;
+                });
+                itemsNotInCart[itemInCart].addToCart=true
+            }
+            setProducts(itemsNotInCart)
+        })
         .catch(err => console.log(err));
 
     props.dispatch(activePage('/shop'));
+    console.log(props)
     }, []);
+    const addCartItems = (item)=>{
+        const itemsNotInCart = [...products]
+        const itemInCart = itemsNotInCart.findIndex((product)=>{
+             return product.id === item.id;
+        });
+        itemsNotInCart[itemInCart].addToCart=true
+        setProducts(itemsNotInCart)
+    }
+    const removeCartItems = (item)=>{
+        const itemsNotInCart = [...products]
+        const itemInCart = itemsNotInCart.findIndex((product)=>{
+             return product.id === item.id;
+        });
+        itemsNotInCart[itemInCart].addToCart=false
+        setProducts(itemsNotInCart)
+    }
+    
     return (<React.Fragment>
                 <ShopSidebar/>
                 <div class="amado_product_area section-padding-100">
@@ -37,7 +64,7 @@ const Shop = (props) => {
                         </div>
                         <div class="row">
                             {products ? products.map((sproduct)=>{
-                                return (<SingleProduct {...sproduct} />)
+                                return (<SingleProduct productItem={sproduct} cartItems={props.cartItems} addCartItems={addCartItems} removeCartItems={removeCartItems}/*dispatch={props.dispatch}*//>)
                             }): <div>no products here</div>}
                         </div>
                         <Pagination/>
@@ -47,7 +74,7 @@ const Shop = (props) => {
 }
 const storeToProp = (state)=>{
     return {
-        productItems: state.products
+        cartItems: state.cart
     }
 } 
 export default connect(storeToProp, null)(Shop);
