@@ -35,6 +35,16 @@ export default class APIService {
       });
       return await resp.json();
     }
+
+    static async GetUserCategory(token) {
+      const resp = await fetch(`http://localhost:8000/groups/`, {
+          'method':'GET',
+          headers: {
+              'Content-Type':'application/json'
+            }
+      });
+      return await resp.json();
+    }
     
     static async UpdateProduct(product_id, body, token) {
       const resp = await fetch(`http://localhost:8000/products/${product_id}/`, {

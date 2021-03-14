@@ -10,8 +10,7 @@ export const LeftProductList = () => {
         fetch('http://localhost:8000/products/',{
             'method': 'GET',
             headers: {
-                'content-type': 'application/json',
-                // 'Authorization': 'Token 454544'
+                'content-type': 'application/json'
             }
         })
         .then(res => res.json())

@@ -38,7 +38,7 @@ export const LeftLogin = () => {
                 <form action="" method="post">
                     <div className="row">
                         <div className="col-md-12 mb-3">
-                            <input type="text" className="form-control" id="email" value={username} placeholder="Email address" onChange={onChangeUsername} required/>
+                            <input type="text" className="form-control" id="email" value={username} placeholder="User name" onChange={onChangeUsername} required/>
                         </div>
                         <div className="col-md-12 mb-3">
                             <input type="text" className="form-control" id="password" value={password} placeholder="Password" onChange={onChangePassword} required/>

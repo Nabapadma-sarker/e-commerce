@@ -42,7 +42,7 @@ const Header = (props) => {
                         <li className = {props.header.activeMenu==='/checkout'? 'active': ''}><NavLink to={"/checkout"}>Checkout</NavLink></li>
                         { !isLoggedIn && <li className = {props.header.activeMenu==='/login'? 'active': ''}><NavLink to={"/login"}>Login</NavLink></li>}
                         { isLoggedIn && <li className = {props.header.activeMenu==='/dashboard'? 'active': ''}><NavLink to={"/dashboard"}>Dashboard</NavLink></li>}
-                        { isLoggedIn && <li><a href="#" onClick={logout}>Logout</a></li>}
+                        { isLoggedIn && <li><NavLink to={"/login"} onClick={logout}>Logout</NavLink></li>}
                     </ul>
                 </nav>
                 <div className="amado-btn-group mt-30 mb-100">

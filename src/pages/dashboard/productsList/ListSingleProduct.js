@@ -19,6 +19,7 @@ const ListSingleProduct = (props) => {
                                 {props.title}
                             </Link>
                             </h4>
+                            <i style={{fontSize:"10px"}}>by {props.user.username}</i>
                         <p class="group inner list-group-item-text">
                         {props.description}</p>
                         <div class="row">
