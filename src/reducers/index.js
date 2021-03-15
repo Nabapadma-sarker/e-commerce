@@ -1,4 +1,4 @@
-import {ADD_TO_CART,REMOVE_FROM_CART,ACTIVE_PAGE,CART_INCREMENT,CART_DECREMENT} from '../actions';
+import {ADD_TO_CART,ADD_TO_CART_Q,REMOVE_FROM_CART,ACTIVE_PAGE,CART_INCREMENT,CART_DECREMENT} from '../actions';
 
 import {shopPageData} from "../data/shopPageData";
 
@@ -36,6 +36,24 @@ export const rootReducer = (state = initialState, action)=>{
             }
             // allProducts[itemId].addToCart = true;
             return {...state, cart: allcart, products: allProducts};
+        case ADD_TO_CART_Q:
+            allcart = [...state.cart];
+            allProducts = [...state.products];
+            console.log('reducer ',action);
+            console.log('reducer ',action.payload);
+
+            itemInCart = allcart.findIndex((product)=>{
+                 return product.id === action.payload.productDetail.id;
+            });
+            if (itemInCart < 0) {
+                allcart.push(action.payload.productDetail);
+                console.log(allcart)
+                allcart[allcart.length-1].quantity = action.payload.itemCart;
+            }
+            else {
+                allcart[itemInCart].quantity = action.payload.itemCart;            
+            }
+            return {...state, cart: allcart, products: allProducts};
         case REMOVE_FROM_CART:
             allcart = [...state.cart];
             allProducts = [...state.products];
@@ -48,39 +66,39 @@ export const rootReducer = (state = initialState, action)=>{
             return {...state, cart: allcart, products: allProducts};
         case CART_INCREMENT:
             allcart = [...state.cart];
-            itemId = state.products.findIndex((product)=>{
-                return product.id === action.payload;
-            });
+            // itemId = state.products.findIndex((product)=>{
+            //     return product.id === action.payload;
+            // });
             itemInCart = allcart.findIndex((product)=>{
                 return product.id === action.payload;
             });
-            console.log('ic',state.products[itemId].quantity);
-            if (allcart[itemInCart].quantity < state.products[itemId].quantity) {
+            // console.log('ic',state.products[itemId].quantity);
+            // if (allcart[itemInCart].quantity < state.products[itemId].quantity) {
                 allcart[itemInCart].quantity++;
                 return {...state, cart: allcart};                
-            }
-            else{
-                return {...state}
-            }
+            // }
+            // else{
+            //     return {...state}
+            // }
         case CART_DECREMENT:
             allcart = [...state.cart];
             itemInCart = allcart.findIndex((product)=>{
                 return product.id === action.payload;
             });
-            if (allcart[itemInCart].quantity > 1) {
+            // if (allcart[itemInCart].quantity > 1) {
                 allcart[itemInCart].quantity--;
                 return {...state, cart: allcart};                
-            }
-            else{
-                itemId = state.products.findIndex((product)=>{
-                    return product.id === action.payload;
-                });
-                state.products[itemId].addToCart = false;
-                let refreshCart = allcart.filter((product)=>{
-                    return product.id != action.payload;
-                });
-                return {...state, cart: refreshCart}
-            }
+            // }
+            // else{
+            //     itemId = state.products.findIndex((product)=>{
+            //         return product.id === action.payload;
+            //     });
+            //     state.products[itemId].addToCart = false;
+            //     let refreshCart = allcart.filter((product)=>{
+            //         return product.id != action.payload;
+            //     });
+            //     return {...state, cart: refreshCart}
+            // }
         case ACTIVE_PAGE:
             let url = {
                 activeMenu: action.payload
