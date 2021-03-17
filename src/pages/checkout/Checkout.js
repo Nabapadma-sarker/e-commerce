@@ -10,11 +10,17 @@ const Checkout = (props) => {
     return ( <div class="cart-table-area section-padding-100">
     <div class="container-fluid">
         <div class="row">
-            <LeftCheckout/>
-            <RightCheckout/>
+            <LeftCheckout cartItem={props.cartItem}/>
+            <RightCheckout cartItem={props.cartItem}/>
         </div>
     </div>
 </div> );
 }
- 
-export default connect()(Checkout);
+
+const storeToProp = state=>{
+    console.log(state);
+    return {
+        cartItem: state.cart,
+    }
+}
+export default connect(storeToProp, null)(Checkout);

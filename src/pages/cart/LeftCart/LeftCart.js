@@ -29,10 +29,4 @@ const LeftCart = (props) => {
 </div> );
 }
 
-const storeToProp = state=>{
-    console.log(state);
-    return {
-        cartItem: state.cart,
-    }
-}
-export default connect(storeToProp, null)(LeftCart);
+export default connect()(LeftCart);
