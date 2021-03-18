@@ -7,14 +7,19 @@ export const LeftProductList = () => {
     const [products, setProducts] = useState([])
     const [cookies, setCookie] = useCookies(['etoken']);
     useEffect(() => {       
-        fetch('http://localhost:8000/products/',{
+        fetch('http://localhost:8000/products-user/',{
             'method': 'GET',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'Authorization':`Token ${cookies['etoken']}` 
             }
         })
         .then(res => res.json())
-        .then(res => setProducts(res))
+        .then(res => {
+            console.log(res)
+            setProducts(res)
+            }
+            )
         .catch(err => console.log(err));
 
     // props.dispatch(activePage('/shop'));
@@ -42,9 +47,9 @@ export const LeftProductList = () => {
                     <h2>Product List</h2>
                 </div>                
                 <div class="row view-group">
-                    {products ? products.map((sproduct)=>{
+                    {products.length > 0 ? products.map((sproduct)=>{
                         return (<ListSingleProduct {...sproduct} dproduct={deleteProduct} />)
-                    }): <div>no products here</div>}
+                    }): <div>no products were added.</div>}
                 </div>
             </div>
         </div> );
