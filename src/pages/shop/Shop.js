@@ -9,7 +9,7 @@ import {activePage, addToCart} from '../../actions';
 
 const Shop = (props) => {
     const [products, setProducts] = useState([])
-    const [listOrGrid, setListOrGrid] = useState('')
+    const [listOrGrid, setListOrGrid] = useState('grid')
     useEffect(() => {       
         fetch('http://localhost:8000/products/',{
             'method': 'GET',

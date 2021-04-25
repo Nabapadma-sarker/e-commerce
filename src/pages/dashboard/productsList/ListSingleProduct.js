@@ -6,7 +6,7 @@ import {addCart} from '../../../actions';
 const ListSingleProduct = (props) => {
     return ( <div class="item list-group-item">
                 <div class="thumbnail card col-xs-12 col-lg-12">
-                    <div class="img-event">
+                    <div class="img-event card-body">
                         <img class="group list-group-image img-fluid" src={props.hoverImage} alt="" />
                     </div>
                     <div class="caption card-body">
@@ -33,10 +33,10 @@ const ListSingleProduct = (props) => {
                                 to={{
                                     pathname: `/edit-product/${props.id}`,
                                     productProps: props
-                                }}>
+                                }} className="btn btn-secondary mr-2 mt-2">
                                 Edit Product
                             </Link>
-                            <button type="button" class="btn btn-danger" onClick={e => props.dproduct(props.id)}>Delete</button>
+                            <button type="button" class="btn btn-danger mt-2" onClick={e => props.dproduct(props.id)}>Delete</button>
                             </div>
                         </div>
                     </div>
