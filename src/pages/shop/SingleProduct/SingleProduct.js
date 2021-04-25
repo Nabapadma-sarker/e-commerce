@@ -8,14 +8,14 @@ const SingleProduct = (props) => {
         console.log(props)
     },[])
     return ( 
-        <div className="col-12 col-sm-6 col-md-12 col-xl-6">
-            <div className="single-product-wrapper">
-                <div className="product-img">
+        <div className={"col-12 col-sm-6 col-md-12 " + (props.listOrGrid == 'list'? 'col-xl-12': 'col-xl-6')}>
+            <div className={"single-product-wrapper " + (props.listOrGrid == 'list'? 'row': '')}>
+                <div className={"product-img "+ (props.listOrGrid == 'list'? 'col-xl-3': '')}>
                     <img src={props.productItem.hoverImage} alt=""/>
                     <img className="hover-img" src={props.productItem.hoverImage} alt=""/>
                 </div>
 
-                <div className="product-description d-flex align-items-center justify-content-between">
+                <div className={"product-description d-flex align-items-center justify-content-between " + (props.listOrGrid == 'list'? 'col-xl-9': '')}>
                     <div className="product-meta-data">
                         <div className="line"></div>
                         <p className="product-price">${props.productItem.price}</p>

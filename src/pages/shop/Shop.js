@@ -9,6 +9,7 @@ import {activePage, addToCart} from '../../actions';
 
 const Shop = (props) => {
     const [products, setProducts] = useState([])
+    const [listOrGrid, setListOrGrid] = useState('')
     useEffect(() => {       
         fetch('http://localhost:8000/products/',{
             'method': 'GET',
@@ -50,6 +51,9 @@ const Shop = (props) => {
         setProducts(itemsNotInCart)
     }
     
+    const listGridView=(view)=>{
+        setListOrGrid(view)
+    }
     return (<React.Fragment>
                 <ShopSidebar/>
                 <div class="amado_product_area section-padding-100">
@@ -57,14 +61,14 @@ const Shop = (props) => {
                         <div class="row">
                             <div class="col-12">
                                 <div class="product-topbar d-xl-flex align-items-end justify-content-between">
-                                    <ProductView/>
+                                    <ProductView listGridView={listGridView} listOrGrid={listOrGrid}/>
                                     <Sorting/>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             {products ? products.map((sproduct)=>{
-                                return (<SingleProduct productItem={sproduct} cartItems={props.cartItems} addCartItems={addCartItems} removeCartItems={removeCartItems}/*dispatch={props.dispatch}*//>)
+                                return (<SingleProduct productItem={sproduct} cartItems={props.cartItems} addCartItems={addCartItems} removeCartItems={removeCartItems} listOrGrid={listOrGrid}/*dispatch={props.dispatch}*//>)
                             }): <div>no products here</div>}
                         </div>
                         <Pagination/>

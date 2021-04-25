@@ -1310,7 +1310,7 @@ img {
     font-size: 16px;
     text-align: center;
     line-height: 44px; }
-    .product-topbar .total-products .view a:first-child {
+    .product-topbar .total-products .view a.active {
       background-color: #419a1c; }
   .product-topbar .product-sorting p {
     margin-bottom: 0;
