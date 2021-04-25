@@ -7,6 +7,7 @@ export const LeftLogin = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [cookies, setCookie] = useCookies(['etoken']);
+    const [userid, setUserid] = useCookies(['user_id']);
     let history = useHistory();
     
     useEffect(() => {
@@ -24,7 +25,12 @@ export const LeftLogin = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         APIService.LoginUser({username, password})
-        .then(res=> setCookie('etoken', res.token))
+        .then(res=> {
+            if (res.token) {
+                setCookie('etoken', res.token)                
+                setUserid('user_id', res.user_id)                
+            }
+        })
         .catch(err=> console.log(err));
     }
     return ( 

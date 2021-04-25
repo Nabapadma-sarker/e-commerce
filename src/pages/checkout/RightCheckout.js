@@ -26,7 +26,7 @@ export const RightCheckout = (props) => {
                 </div>
 
                 <div className="cart-btn mt-100">
-                    <a href="/" className="btn amado-btn w-100">Checkout</a>
+                    <button href="/" className="btn amado-btn w-100" onClick={props.checkoutClicked}>Checkout</button>
                 </div>
             </div>
         </div> );

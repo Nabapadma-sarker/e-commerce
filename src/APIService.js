@@ -101,10 +101,25 @@ export default class APIService {
       const resp = await fetch('http://localhost:8000/auth/', {
         'method': 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(body)
       });
+      return await resp.json();
+
+    }
+
+    static async GetUserDetails(user_id, token) {
+
+      const resp = await fetch(`http://localhost:8000/users/${user_id}/`, {
+        'method':'GET',
+        headers: {
+            'Content-Type':'application/json',
+            'Authorization':`Token ${token}` 
+          }
+
+      })
+
       return await resp.json();
 
     }
